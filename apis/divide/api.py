@@ -13,7 +13,7 @@ def api(args: dict) -> TaskResult:
         return task_result
     x = int(x)
     y = int(y)
-    task_result.val = x - y
+    task_result.val = x / y
     task_result.exec_result = TaskExecResult.SUCCESS
 
     return task_result

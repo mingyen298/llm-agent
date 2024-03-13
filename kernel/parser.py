@@ -90,12 +90,12 @@ class TaskParser:
 
         for id in ordered_tasks:
             task_dict = task_list[id]
-            code = self._tool_management.get(task_dict["name"])
+            code = self._tool_management.get(task_dict["tool"])
             if code == "":
                 task_group.is_runnable = False
                 break
             task = Task(
-                id=id, name=task_dict["name"], args=task_dict["args"], code=code)
+                id=id, name=task_dict["tool"], args=task_dict["args"], code=code)
             task_group.add(task=task)
 
         task_group.input_tasks = input_tasks

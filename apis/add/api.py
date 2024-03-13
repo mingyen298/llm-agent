@@ -1,21 +1,22 @@
 from kernel.task import TaskResult, TaskExecResult
 
 
-def add(args: dict) -> TaskResult:
+def api(args: dict) -> TaskResult:
     task_result = TaskResult()
     x = args.get("x", False)
-    if not x:
+    if isinstance(x,bool):
         task_result.exec_result = TaskExecResult.FAIL
         return task_result
     y = args.get("y", False)
-    if not y:
+    if isinstance(y,bool):
         task_result.exec_result = TaskExecResult.FAIL
         return task_result
-
+    x = int(x)
+    y = int(y)
     task_result.val = x + y
     task_result.exec_result = TaskExecResult.SUCCESS
 
     return task_result
 
 
-output = add(args=input)
+output = api(args=input)

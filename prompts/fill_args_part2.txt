@@ -158,10 +158,10 @@ In case the user input cannot be parsed, or there is no suitable tool in the too
 <USER>:
 Plot the first 20 records of air temperature data as a line chart.
 <ASSISTANT>:
-[{"tool":"read_csv","id":0,"dep":[-1],args:{"count":20}},{"tool":"draw_line_chart","id":1,"dep":[0],args:{"df":"<resource>-0"}}]
+[{"tool":"read_csv","id":0,"dep":[-1],args:{"count":20}},{"tool":"draw_line_chart","id":1,"dep":[0],"args":{"df":"<resource>-0"}}]
 	
 <USER>:
 Plot the first 10 records of rotational speed data as a bar chart.
 <ASSISTANT>:
-[{"tool":"read_csv","id":0,"dep":[-1],args:{"count":10}},{"tool":"draw_bar_chart","id":1,"dep":[0],args:{"df":"<resource>-0"}}]
+[{"tool":"read_csv","id":0,"dep":[-1],args:{"count":10}},{"tool":"draw_bar_chart","id":1,"dep":[0],"args":{"df":"<resource>-0"}}]
 }}

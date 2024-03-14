@@ -1,0 +1,18 @@
+{
+    "api_name": "add",
+    "description": "Used to add two input numbers",
+    "args": {
+        "x": {
+            "type": "Int",
+            "description": "The 1st number to add"
+        },
+        "y": {
+            "type": "Int",
+            "description": "The 2nd number to add"
+        }
+    },
+    "result": {
+        "type": "Int",
+        "description": "The result obtained after adding the 2 numbers"
+    }
+}

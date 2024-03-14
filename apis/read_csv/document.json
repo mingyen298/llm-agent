@@ -1,0 +1,14 @@
+{
+    "api_name": "read_csv",
+    "description": "Reads the specified first n records from a default csv file",
+    "args": {
+        "count": {
+            "type": "Int",
+            "description": "The number of records to read"
+        }
+    },
+    "result": {
+        "type": "DataFrame",
+        "description": "The data set extracted from the csv file"
+    }
+}

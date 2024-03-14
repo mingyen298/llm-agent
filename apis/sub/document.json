@@ -1,0 +1,18 @@
+{
+    "api_name": "sub",
+    "description": "Used to subtract one number from another",
+    "args": {
+        "x": {
+            "type": "Int",
+            "description": "The 1st number to be subtracted from"
+        },
+        "y": {
+            "type": "Int",
+            "description": "The 2nd number to subtract"
+        }
+    },
+    "result": {
+        "type": "Int",
+        "description": "The result obtained after subtracting the 2 numbers"
+    }
+}

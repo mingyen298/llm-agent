@@ -1,0 +1,18 @@
+{
+    "api_name": "draw_pie_chart",
+    "description": "Draws a pie chart from the data set extracted from a csv file",
+    "args": {
+        "df": {
+            "type": "DataFrame",
+            "description": "The data set read from the csv file"
+        },
+        "column": {
+            "type": "String",
+            "description": "Specifies the data column name in the default csv file"
+        }
+    },
+    "result": {
+        "type": "String",
+        "description": "The path where the drawn pie chart is saved"
+    }
+}

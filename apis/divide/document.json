@@ -1,0 +1,18 @@
+{
+    "api_name": "divide",
+    "description": "Used to divide one number by another",
+    "args": {
+        "x": {
+            "type": "Int",
+            "description": "The number to be divided"
+        },
+        "y": {
+            "type": "Int",
+            "description": "The divisor"
+        }
+    },
+    "result": {
+        "type": "Int",
+        "description": "The result after dividing the two numbers"
+    }
+}

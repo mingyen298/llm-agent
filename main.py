@@ -1,6 +1,7 @@
 from kernel.parser import TaskParser
 from kernel.runner import TaskRunner
 from kernel.tool_management import ToolManagement
+from kernel.util import Util
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
@@ -70,11 +71,14 @@ if __name__ == "__main__":
     parser = TaskParser(tool_management=tool_management)
     runner = TaskRunner()
 
-    user_input = 'First add 5 to 10, then add 9, then multiply by 10 and then subtract 6'
+    user_input1 = 'Calculate 5 multiplied by 100 then subtract 10.'
+    user_input2 = 'First add 5 to 10, then add 9, then multiply by 10 and then subtract 6'
 
-    task_list = findDep(user_input,system_prompt=find_dep_prompt)
+    
 
-    result =  fillArgs(user_input=user_input,task_list=task_list)
+    task_list = findDep(user_input1,system_prompt=find_dep_prompt)
+
+    result =  fillArgs(user_input=user_input1,task_list=task_list)
 
     print(result)
 

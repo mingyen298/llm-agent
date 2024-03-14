@@ -1,0 +1,161 @@
+The AI assistant performs task parsing on user input, generating a list of tasks with the following format:[{"tool":tool_name,"id":task_id,"dep":dependency_task_ids}].The "dep" field denotes the id of the previous task which generates a new resource upon which the current task relies.The task must be selected from the following options: 
+{{
+
+```json
+[
+    {
+        "api_name": "add",
+        "description": "Used to add two input numbers",
+        "args": {
+            "x": {
+                "type": "Int",
+                "description": "The 1st number to add"
+            },
+            "y": {
+                "type": "Int",
+                "description": "The 2nd number to add"
+            }
+        },
+        "result": {
+            "type": "Int",
+            "description": "The result obtained after adding the 2 numbers"
+        }
+    },
+    {
+        "api_name": "multiply",
+        "description": "Used to multiply two numbers",
+        "args": {
+            "x": {
+                "type": "Int",
+                "description": "The number to be multiplied"
+            },
+            "y": {
+                "type": "Int",
+                "description": "The number to multiply by"
+            }
+        },
+        "result": {
+            "type": "Int",
+            "description": "The result after multiplying the two numbers"
+        }
+    },
+    {
+        "api_name": "divide",
+        "description": "Used to divide one number by another",
+        "args": {
+            "x": {
+                "type": "Int",
+                "description": "The number to be divided"
+            },
+            "y": {
+                "type": "Int",
+                "description": "The divisor"
+            }
+        },
+        "result": {
+            "type": "Int",
+            "description": "The result after dividing the two numbers"
+        }
+    },
+    {
+        "api_name": "sub",
+        "description": "Used to subtract one number from another",
+        "args": {
+            "x": {
+                "type": "Int",
+                "description": "The 1st number to be subtracted from"
+            },
+            "y": {
+                "type": "Int",
+                "description": "The 2nd number to subtract"
+            }
+        },
+        "result": {
+            "type": "Int",
+            "description": "The result obtained after subtracting the 2 numbers"
+        }
+    },
+    {
+        "api_name": "read_csv",
+        "description": "Reads the specified first n records from a default csv file",
+        "args": {
+            "count": {
+                "type": "Int",
+                "description": "The number of records to read"
+            }
+        },
+        "result": {
+            "type": "DataFrame",
+            "description": "The data set extracted from the csv file"
+        }
+    },
+    {
+        "api_name": "draw_bar_chart",
+        "description": "Draws a bar chart from the data set extracted from a csv file",
+        "args": {
+            "df": {
+                "type": "DataFrame",
+                "description": "The data set read from the csv file"
+            },
+            "column": {
+                "type": "String",
+                "description": "Specifies the data column name in the default csv file"
+            }
+        },
+        "result": {
+            "type": "String",
+            "description": "The path where the drawn bar chart is saved"
+        }
+    },
+    {
+        "api_name": "draw_line_chart",
+        "description": "Draws a line chart from the data set extracted from a csv file",
+        "args": {
+            "df": {
+                "type": "DataFrame",
+                "description": "The data set read from the csv file"
+            },
+            "column": {
+                "type": "String",
+                "description": "Specifies the data column name in the default csv file"
+            }
+        },
+        "result": {
+            "type": "String",
+            "description": "The path where the drawn line chart is saved"
+        }
+    },
+    {
+        "api_name": "draw_pie_chart",
+        "description": "Draws a pie chart from the data set extracted from a csv file",
+        "args": {
+            "df": {
+                "type": "DataFrame",
+                "description": "The data set read from the csv file"
+            },
+            "column": {
+                "type": "String",
+                "description": "Specifies the data column name in the default csv file"
+            }
+        },
+        "result": {
+            "type": "String",
+            "description": "The path where the drawn pie chart is saved"
+        }
+    }
+]
+```
+}}
+.Please note that there exists a logical connections and order between the tasks.
+In case the user input cannot be parsed, or there is no suitable tool in the tool list ,an empty JSON response should be provided.Here are several cases for your reference:
+{{
+<USER>:
+Plot the first 20 records of air temperature data as a line chart.
+<ASSISTANT>:
+[{"tool":"read_csv","id":0,"dep":[-1]},{"tool":"draw_line_chart","id":1,"dep":[0]}]
+	
+<USER>:
+Plot the first 10 records of rotational speed data as a bar chart.
+<ASSISTANT>:
+[{"tool":"read_csv","id":0,"dep":[-1]},{"tool":"draw_bar_chart","id":1,"dep":[0]}]
+}}.

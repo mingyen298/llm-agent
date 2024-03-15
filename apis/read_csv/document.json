@@ -1,10 +1,14 @@
 {
     "api_name": "read_csv",
-    "description": "Reads the specified first n records from a default csv file",
+    "description": "Used to read default CSV and select data range.",
     "args": {
-        "count": {
+        "star": {
             "type": "Int",
-            "description": "The number of records to read"
+            "description": "The start number for data filtering."
+        },
+        "end": {
+            "type": "Int",
+            "description": "The end number for data filtering."
         }
     },
     "result": {

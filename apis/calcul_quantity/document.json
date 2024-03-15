@@ -1,0 +1,18 @@
+{
+    "api_name": "calcul_quantity",
+    "description": "To calculate the quantity of a specific column.",
+    "args": {
+        "data": {
+            "type": "DataFrame",
+            "description": "The data used for calculation."
+        },
+        "column": {
+            "type": "String",
+            "description": "The column used for calculation after selecting from the data.The only valid columns are the following:Product ID,Type,Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Target,Failure Type"
+        }
+    },
+    "result": {
+        "type": "Dict",
+        "description": "The result is the calculated value converted into a dictionary."
+    }
+}

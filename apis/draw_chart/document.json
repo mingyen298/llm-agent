@@ -1,0 +1,18 @@
+{
+    "api_name": "draw_chart",
+    "description": "Plotting images based on the received results.",
+    "args": {
+        "result": {
+            "type": "Dict",
+            "description": "The result is used to provide data for plotting charts."
+        },
+        "chart_type": {
+            "type": "String",
+            "description": "The chart_type specifies the type of chart to plot.The only valid chart_types are the following: bar, line, pie"
+        }
+    },
+    "result": {
+        "type": "String",
+        "description": "The result will be the path to the generated image."
+    }
+}

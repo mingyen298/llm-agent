@@ -4,24 +4,6 @@ The AI assistant performs task parsing on user input, generating a list of tasks
 ```json
 [
     {
-        "api_name": "add",
-        "description": "Used to add two input numbers",
-        "args": {
-            "x": {
-                "type": "Int",
-                "description": "The 1st number to add"
-            },
-            "y": {
-                "type": "Int",
-                "description": "The 2nd number to add"
-            }
-        },
-        "result": {
-            "type": "Int",
-            "description": "The result obtained after adding the 2 numbers"
-        }
-    },
-    {
         "api_name": "multiply",
         "description": "Used to multiply two numbers",
         "args": {
@@ -76,12 +58,34 @@ The AI assistant performs task parsing on user input, generating a list of tasks
         }
     },
     {
-        "api_name": "read_csv",
-        "description": "Reads the specified first n records from a default csv file",
+        "api_name": "add",
+        "description": "Used to add two input numbers",
         "args": {
-            "count": {
+            "x": {
                 "type": "Int",
-                "description": "The number of records to read"
+                "description": "The 1st number to add"
+            },
+            "y": {
+                "type": "Int",
+                "description": "The 2nd number to add"
+            }
+        },
+        "result": {
+            "type": "Int",
+            "description": "The result obtained after adding the 2 numbers"
+        }
+    },
+    {
+        "api_name": "read_csv",
+        "description": "Used to read default CSV and select data range.",
+        "args": {
+            "star": {
+                "type": "Int",
+                "description": "The start number for data filtering."
+            },
+            "end": {
+                "type": "Int",
+                "description": "The end number for data filtering."
             }
         },
         "result": {
@@ -90,57 +94,39 @@ The AI assistant performs task parsing on user input, generating a list of tasks
         }
     },
     {
-        "api_name": "draw_bar_chart",
-        "description": "Draws a bar chart from the data set extracted from a csv file",
+        "api_name": "calcul_quantity",
+        "description": "To calculate the quantity of a specific column.",
         "args": {
-            "df": {
+            "data": {
                 "type": "DataFrame",
-                "description": "The data set read from the csv file"
+                "description": "The data used for calculation."
             },
             "column": {
                 "type": "String",
-                "description": "Specifies the data column name in the default csv file"
+                "description": "The column used for calculation after selecting from the data.The only valid columns are the following:Product ID,Type,Air temperature [K],Process temperature [K],Rotational speed [rpm],Torque [Nm],Tool wear [min],Target,Failure Type"
             }
         },
         "result": {
-            "type": "String",
-            "description": "The path where the drawn bar chart is saved"
+            "type": "Dict",
+            "description": "The result is the calculated value converted into a dictionary."
         }
     },
     {
-        "api_name": "draw_line_chart",
-        "description": "Draws a line chart from the data set extracted from a csv file",
+        "api_name": "draw_chart",
+        "description": "Plotting images based on the received results.",
         "args": {
-            "df": {
-                "type": "DataFrame",
-                "description": "The data set read from the csv file"
+            "result": {
+                "type": "Dict",
+                "description": "The result is used to provide data for plotting charts."
             },
-            "column": {
+            "chart_type": {
                 "type": "String",
-                "description": "Specifies the data column name in the default csv file"
+                "description": "The chart_type specifies the type of chart to plot.The only valid chart_types are the following: bar, line, pie"
             }
         },
         "result": {
             "type": "String",
-            "description": "The path where the drawn line chart is saved"
-        }
-    },
-    {
-        "api_name": "draw_pie_chart",
-        "description": "Draws a pie chart from the data set extracted from a csv file",
-        "args": {
-            "df": {
-                "type": "DataFrame",
-                "description": "The data set read from the csv file"
-            },
-            "column": {
-                "type": "String",
-                "description": "Specifies the data column name in the default csv file"
-            }
-        },
-        "result": {
-            "type": "String",
-            "description": "The path where the drawn pie chart is saved"
+            "description": "The result will be the path to the generated image."
         }
     }
 ]
@@ -150,12 +136,12 @@ The AI assistant performs task parsing on user input, generating a list of tasks
 In case the user input cannot be parsed, or there is no suitable tool in the tool list ,an empty JSON response should be provided.Here are several cases for your reference:
 {{
 <USER>:
-Plot the first 20 records of air temperature data as a line chart.
+Calculate 5 multiplied by 100 then subtract 10.
 <ASSISTANT>:
-[{"tool":"read_csv","id":0,"dep":[-1]},{"tool":"draw_line_chart","id":1,"dep":[0]}]
+[{"tool":"multiply","id":0,"dep":[-1]},{"tool":"sub","id":1,"dep":[0]}]
 	
 <USER>:
-Plot the first 10 records of rotational speed data as a bar chart.
+Take 50 to 100 pieces of air temperature data, calculate the number of each temperature, and finally draw it as a bar chart.
 <ASSISTANT>:
-[{"tool":"read_csv","id":0,"dep":[-1]},{"tool":"draw_bar_chart","id":1,"dep":[0]}]
+[{"tool":"read_csv","id":0,"dep":[-1]},{"tool":"calcul_quantity","id":1,"dep":[0]},{"tool":"draw_chart","id":2,"dep":[1]}]
 }}.

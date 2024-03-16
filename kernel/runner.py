@@ -3,7 +3,7 @@ from .util import Util
 from .task import Task, TaskGroup,TaskResult,TaskExecResult
 import os
 import pandas as pd
-
+import matplotlib.pyplot as plt
 class TaskRunner:
     def __init__(self):
         self._resource_map = dict()

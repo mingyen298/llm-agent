@@ -71,14 +71,15 @@ if __name__ == "__main__":
     parser = TaskParser(tool_management=tool_management)
     runner = TaskRunner()
 
-    user_input1 = 'Calculate 5 multiplied by 100 then subtract 10.'
-    user_input2 = 'First add 5 to 10, then add 9, then multiply by 10 and then subtract 6'
+    user_input1 = 'Take 50 to 100 pieces of air temperature data, calculate the number of each temperature, and finally draw it as a bar chart.'
+    # user_input1 = 'Take 50 to 100 pieces of Target data, calculate the number of each target, and finally draw it as a bar chart.'
+    user_input2 = 'First add 5 to 100, then add 9, then multiply by 10 and then subtract 90'
 
     
 
-    task_list = findDep(user_input1,system_prompt=find_dep_prompt)
+    task_list = findDep(user_input2,system_prompt=find_dep_prompt)
 
-    result =  fillArgs(user_input=user_input1,task_list=task_list)
+    result =  fillArgs(user_input=user_input2,task_list=task_list)
 
     print(result)
 

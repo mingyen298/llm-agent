@@ -18,3 +18,5 @@ def api(args: dict) -> TaskResult:
     task_result.val = count_dict
     task_result.exec_result = TaskExecResult.SUCCESS
     return task_result
+
+output = api(args=input)

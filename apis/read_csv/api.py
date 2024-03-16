@@ -14,7 +14,7 @@ def api(args:dict)->TaskResult:
         task_result.exec_result = TaskExecResult.FAIL
         return  task_result
     
-    csv_path = "/home/mingyen/Desktop/SideProject/Toolformer/test_maintenance.csv"
+    csv_path = "/Users/xiemingyan/Desktop/SideProject/llm-agent/test_maintenance.csv"
     df = pd.read_csv(csv_path)
     # 篩選出指定範圍的 UDI
     df_filtered = df[df['UDI'].between(start_index, end_index)]

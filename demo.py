@@ -7,13 +7,6 @@ import os
 from openai import OpenAI
 from typing import Union
 
-output_tasks = '''[{"tool":"add","id":0,"dep":[-1],"args":{"x":5,"y":100}},{"tool":"sub","id":1,"dep":[0],"args":{"x":"<resource>-0","y":10}}]'''
-mutil_tasks = '''[
-    {"tool":"add","id":0,"dep":[-1],"args":{"x":5,"y":10}},
-    {"tool":"add","id":1,"dep":[0],"args":{"x":9,"y":"<resource>-0"}},
-    {"tool":"multiply","id":2,"dep":[1],"args":{"x":"<resource>-1","y":10}},
-    {"tool":"sub","id":3,"dep":[2],"args":{"x":"<resource>-2","y":6}}
-]'''
 
 load_dotenv()
 
@@ -71,24 +64,26 @@ if __name__ == "__main__":
     parser = TaskParser(tool_management=tool_management)
     runner = TaskRunner()
 
-    user_input1 = 'Take 1 to 100 pieces of process temperature data, calculate the number of each temperature, and finally draw it as a pie chart.'
-    # user_input1 = 'Take 1 to 100 pieces of process temperature data, calculate the number of each temperature, and finally draw it as a bar chart.'
-    # user_input1 = 'Take 50 to 100 pieces of Target data, calculate the number of each target, and finally draw it as a bar chart.'
-    user_input2 = 'First add 5 to 100, then add 9, then multiply by 10 and then subtract 90'
+    # user_input1 = 'Take 1 to 100 pieces of process temperature data, calculate the number of each temperature, and finally draw it as a pie chart.'
+    # user_input1 = 'Take 30 to 100 pieces of process temperature data, calculate the number of each temperature, and finally draw it as a bar chart.'
 
+    while True:
+        print("Enter instructions:")
+        user_input = input()
     
+        # print(input)
+        task_list = findDep(user_input,system_prompt=find_dep_prompt)
+        print(f'''call api:\n{task_list}''')
+        result =  fillArgs(user_input=user_input,task_list=task_list)
 
-    task_list = findDep(user_input1,system_prompt=find_dep_prompt)
-
-    result =  fillArgs(user_input=user_input1,task_list=task_list)
-
-    print(result)
+        # print(result)
 
 
 
-    tg = parser.run(result)
-    if tg.is_runnable:
-        print("yes")
-        runner.run(task_group=tg)
-    else:
-        print("no")
+
+        tg = parser.run(result)
+        if tg.is_runnable:
+            # print("yes")
+            runner.run(task_group=tg)
+        else:
+            print("no")

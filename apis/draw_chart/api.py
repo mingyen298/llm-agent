@@ -27,7 +27,7 @@ def api(args: dict) -> TaskResult:
     image_dir = '.'
     # os.makedirs(image_dir, exist_ok=True)
     # 保存圖像並關閉繪圖物件
-    image_path = os.path.join(image_dir, 'bar_chart.png')
+    image_path = os.path.join(image_dir, f'{chart_type}_chart.png')
 
     plt.savefig(image_path)
     plt.close()

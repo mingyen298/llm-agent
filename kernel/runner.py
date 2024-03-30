@@ -8,7 +8,7 @@ class TaskRunner:
     def __init__(self):
         self._resource_map = dict()
     def reset(self):
-        pass
+        self._resource_map = dict()
 
     def _saveTaskResult(self,id:int,task_result:TaskResult):
         uni_key = f'<resource>-{id}'
@@ -35,4 +35,5 @@ class TaskRunner:
             # print()
             temp = task_result.val
             # print(task.id)
+        self.reset()
         print(temp)
